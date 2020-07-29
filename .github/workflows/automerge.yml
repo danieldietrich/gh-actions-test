@@ -1,0 +1,13 @@
+on: pull_request
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'danieldietrich'
+    steps:
+      - uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log("CONTEXT", JSON.stringify(context, null, 2))            
+            console.log("GITHUB", JSON.stringify(github, null, 2))
