@@ -10,4 +10,4 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             console.log("const context =", JSON.stringify(context, null, 2))            
-            console.log("const github =", JSON.stringify(github.pulls, null, 2))
+            console.log("const github =", github.pulls)
