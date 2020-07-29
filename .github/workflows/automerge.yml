@@ -9,5 +9,15 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            console.log("CONTEXT", JSON.stringify(context, null, 2))            
-            console.log("GITHUB", JSON.stringify(github, null, 2))
+            const { repository: repo, pull_request: pr } = context.payload
+            github.pulls.createReview({
+              owner: repo.owner.login,
+              repo: repo.name,
+              pull_number: pr.number,
+              event: 'APPROVE'
+            })
+            github.pulls.merge({
+              owner: repo.owner.login,
+              repo: repo.name,
+              pull_number: pr.number
+            })
